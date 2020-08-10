@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{7F256FE6-B8FA-4B09-B36C-BCD87F0DA093}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TimeMaterialTestCases/TestCases.cs">
+    <Files>
+      <File FileName="TimeMaterialTestCases/WebHelper.cs" Line="45" Column="43" />
+      <File FileName="TimeMaterialTestCases/TestCases.cs" Line="47" Column="42" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TimeMaterialTestCases" expanded="True">
+            <Node name="TimeMaterialTestCases" expanded="True">
+              <Node name="TestCases.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="TimeMaterialTestCases" expanded="True">
+            <Node name="TimeMaterialTestCases" expanded="True">
+              <Node name="TimeMaterialTestCases" expanded="True">
+                <Node name="Tests" expanded="True">
+                  <Node name="TEST_002_Create_New_Material_Record_With_Valid_Values" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.TimeMaterialTestCases PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
