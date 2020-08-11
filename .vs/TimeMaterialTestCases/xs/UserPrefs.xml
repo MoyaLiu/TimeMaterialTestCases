@@ -1,20 +1,25 @@
 ﻿<Properties StartupConfiguration="{7F256FE6-B8FA-4B09-B36C-BCD87F0DA093}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TimeMaterialTestCases/Tests/TestCases.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TimeMaterialTestCases/Pages/EmployeePage.cs">
     <Files>
       <File FileName="TimeMaterialTestCases/Pages/LoginPage.cs" Line="13" Column="35" />
-      <File FileName="TimeMaterialTestCases/Pages/HomePage.cs" Line="10" Column="21" />
-      <File FileName="TimeMaterialTestCases/Pages/TMPage.cs" Line="97" Column="1" />
-      <File FileName="TimeMaterialTestCases/Tests/TestCases.cs" Line="77" Column="41" />
+      <File FileName="TimeMaterialTestCases/Pages/HomePage.cs" Line="29" Column="2" />
+      <File FileName="TimeMaterialTestCases/Tests/TestCases.cs" Line="51" Column="10" />
+      <File FileName="TimeMaterialTestCases/Pages/TMPage.cs" Line="12" Column="1" />
+      <File FileName="TimeMaterialTestCases/Tests/EmployeesTestCases.cs" Line="30" Column="86" />
+      <File FileName="TimeMaterialTestCases/Helpers/CommonDriver.cs" Line="12" Column="46" />
+      <File FileName="TimeMaterialTestCases/Tests/LoginTestCases.cs" Line="14" Column="37" />
+      <File FileName="TimeMaterialTestCases/Pages/EmployeePage.cs" Line="33" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TimeMaterialTestCases" expanded="True">
             <Node name="TimeMaterialTestCases" expanded="True">
-              <Node name="Pages" expanded="True" />
-              <Node name="Tests" expanded="True">
-                <Node name="TestCases.cs" selected="True" />
+              <Node name="Helpers" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="EmployeePage.cs" selected="True" />
               </Node>
+              <Node name="Tests" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -24,9 +29,10 @@
           <Node name="TimeMaterialTestCases" expanded="True">
             <Node name="TimeMaterialTestCases" expanded="True">
               <Node name="TimeMaterialTestCases" expanded="True">
-                <Node name="Tests" expanded="True">
-                  <Node name="TEST_002_Create_New_Time_Record_With_Valid_Values" selected="True" />
-                </Node>
+                <Node name="TMTestCases" expanded="True" />
+              </Node>
+              <Node name="TimeMaterialTestCases.Tests" expanded="True">
+                <Node name="EmployeesTestCases" expanded="True" />
               </Node>
             </Node>
           </Node>

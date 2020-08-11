@@ -28,7 +28,7 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Edit Xpath - " + xpath);
 
             //Find the numberic button and click
-            WebDriverWait wait = new WebDriverWait(webDriver, Tests.timeWaiting);
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
             IWebElement editRecord = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
             editRecord.Click();
 
@@ -82,7 +82,7 @@ namespace TimeMaterialTestCases.Pages
             IWebElement eInputAvalible = webDriver.FindElement(By.XPath("//input[@tabindex='0']"));
             eInputAvalible.Click();
 
-            WebDriverWait wait = new WebDriverWait(webDriver, Tests.timeWaiting);
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
             IWebElement ePrice = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("Price")));
             if (!String.IsNullOrEmpty(ePrice.GetAttribute("aria-valuenow")))
             {
@@ -105,7 +105,7 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Delete Xpath - " + xpath);
 
             //Find the numberic button and click
-            WebDriverWait wait = new WebDriverWait(webDriver, Tests.timeWaiting);
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
             IWebElement deleteRecord = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
             deleteRecord.Click();
 
@@ -176,9 +176,6 @@ namespace TimeMaterialTestCases.Pages
             String priceDecimal = (priceStrs.Length > 1) ? priceStrs[1] : "00";
             return stringBuilder.Append("." + priceDecimal.Substring(0, 2)).ToString();
         }
-
-
-
 
     }
 }

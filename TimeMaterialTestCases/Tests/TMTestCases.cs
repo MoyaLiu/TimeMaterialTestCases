@@ -4,46 +4,18 @@ using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using TimeMaterialTestCases.Helpers;
 using TimeMaterialTestCases.Pages;
 
 namespace TimeMaterialTestCases
 {
-    public class Tests
+    [TestFixture]
+    [Parallelizable]
+    public class TMTestCases : CommonDriver
     {
-        IWebDriver driver;
-        LoginPage loginPage;
-        public static TimeSpan timeWaiting = TimeSpan.FromMilliseconds(10000);
-        String loginUrl = "http://horse-dev.azurewebsites.net/";
 
-        [SetUp]
-        public void StartBrowser()
-        {
-            driver = new ChromeDriver();
-            loginPage = new LoginPage();
-            loginPage.Login(driver, loginUrl,"hari", "123123");
-        }
-
-        [TearDown]
-        public void CloseBrowser()
-        {
-            driver.Close();
-        }
-
-        /*Check if the user is able to login with the valid username and password
-         * Expected: The return string should be "Hello hari!"
-         */
-        //[Test]
-        public void TEST_001_Login_With_Valid_Values()
-        {
-            String returnText = loginPage.Login(driver, loginUrl, "hari", "123123");
-            Assert.AreEqual("Hello hari!", returnText);
-        }
-
-        /*Check if the user is able to create a new time record successfully with valid details
-         * Expected: The last record equals the created record.
-         */
-        [Test]
-        public void TEST_002_Create_New_Time_Record_With_Valid_Values()
+        [Test, Description("Check if the user is able to create a new time record successfully with valid details")]
+        public void TM_001_Create_New_Time_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
             homePage.NevigateToTMPage(driver);
@@ -60,11 +32,8 @@ namespace TimeMaterialTestCases
             Assert.AreEqual(tMPage.FormatPrice("123123"), tMPage.GetLastRecordPrice(driver));
         }
 
-        /*Check if the user is able to create a new material record successfully with valid details
-        * Expected: The last record equals the created record.
-        */
-        [Test]
-        public void TEST_003_Create_New_Material_Record_With_Valid_Values()
+        [Test, Description("Check if the user is able to create a new material record successfully with valid details")]
+        public void TM_002_Create_New_Material_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
             homePage.NevigateToTMPage(driver);
@@ -81,11 +50,8 @@ namespace TimeMaterialTestCases
             Assert.AreEqual(tMPage.FormatPrice("987987.12"), tMPage.GetLastRecordPrice(driver));
         }
 
-        /*Check if the user is able to edit an existing record successfully with valid details
-        * No check
-        */
-        [Test]
-        public void TEST_004_Edit_Existing_Record_With_Valid_Values()
+        [Test, Description("Check if the user is able to edit an existing record successfully with valid details")]
+        public void TM_003_Edit_Existing_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
             homePage.NevigateToTMPage(driver);
@@ -96,11 +62,8 @@ namespace TimeMaterialTestCases
             Console.WriteLine("Edit existing record successful");
         }
 
-        /*Check if the user is able to edit an existing record successfully with valid details
-        * No check
-        */
-        [Test]
-        public void TEST_005_Delete_Existing_Record()
+        [Test, Description("Check if the user is able to delete an existing record successfully")]
+        public void TM_004_Delete_Existing_Record()
         {
             HomePage homePage = new HomePage();
             homePage.NevigateToTMPage(driver);
