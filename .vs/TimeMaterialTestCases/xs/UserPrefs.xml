@@ -1,24 +1,26 @@
 ﻿<Properties StartupConfiguration="{7F256FE6-B8FA-4B09-B36C-BCD87F0DA093}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TimeMaterialTestCases/Pages/EmployeePage.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TimeMaterialTestCases/Helpers/Tools.cs">
     <Files>
-      <File FileName="TimeMaterialTestCases/Pages/LoginPage.cs" Line="13" Column="35" />
-      <File FileName="TimeMaterialTestCases/Pages/HomePage.cs" Line="29" Column="2" />
-      <File FileName="TimeMaterialTestCases/Tests/TestCases.cs" Line="51" Column="10" />
-      <File FileName="TimeMaterialTestCases/Pages/TMPage.cs" Line="12" Column="1" />
+      <File FileName="TimeMaterialTestCases/Pages/LoginPage.cs" Line="23" Column="86" />
+      <File FileName="TimeMaterialTestCases/Pages/HomePage.cs" Line="19" Column="65" />
+      <File FileName="TimeMaterialTestCases/Tests/TestCases.cs" Line="28" Column="1" />
+      <File FileName="TimeMaterialTestCases/Pages/TMPage.cs" Line="138" Column="10" />
       <File FileName="TimeMaterialTestCases/Tests/EmployeesTestCases.cs" Line="30" Column="86" />
       <File FileName="TimeMaterialTestCases/Helpers/CommonDriver.cs" Line="12" Column="46" />
       <File FileName="TimeMaterialTestCases/Tests/LoginTestCases.cs" Line="14" Column="37" />
-      <File FileName="TimeMaterialTestCases/Pages/EmployeePage.cs" Line="33" Column="25" />
+      <File FileName="TimeMaterialTestCases/Pages/EmployeePage.cs" Line="54" Column="10" />
+      <File FileName="TimeMaterialTestCases/Helpers/WaitHelper.cs" Line="18" Column="1" />
+      <File FileName="TimeMaterialTestCases/Helpers/Tools.cs" Line="28" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TimeMaterialTestCases" expanded="True">
             <Node name="TimeMaterialTestCases" expanded="True">
-              <Node name="Helpers" expanded="True" />
-              <Node name="Pages" expanded="True">
-                <Node name="EmployeePage.cs" selected="True" />
+              <Node name="Helpers" expanded="True">
+                <Node name="Tools.cs" selected="True" />
               </Node>
+              <Node name="Pages" expanded="True" />
               <Node name="Tests" expanded="True" />
             </Node>
           </Node>
@@ -29,7 +31,9 @@
           <Node name="TimeMaterialTestCases" expanded="True">
             <Node name="TimeMaterialTestCases" expanded="True">
               <Node name="TimeMaterialTestCases" expanded="True">
-                <Node name="TMTestCases" expanded="True" />
+                <Node name="TMTestCases" expanded="True">
+                  <Node name="TM_004_Delete_Existing_Record" selected="True" />
+                </Node>
               </Node>
               <Node name="TimeMaterialTestCases.Tests" expanded="True">
                 <Node name="EmployeesTestCases" expanded="True" />

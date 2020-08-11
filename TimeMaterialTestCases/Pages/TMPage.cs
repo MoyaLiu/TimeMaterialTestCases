@@ -4,6 +4,7 @@ using System.Threading;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using TimeMaterialTestCases.Helpers;
 
 namespace TimeMaterialTestCases.Pages
 {
@@ -12,13 +13,8 @@ namespace TimeMaterialTestCases.Pages
         public void NevigateToCreateNewPage(IWebDriver webDriver)
         {
             //Find create button and click
-            IWebElement createNew = webDriver.FindElement(By.XPath("//*[@id='container']/p/a"));
+            webDriver.FindElement(By.XPath("//*[@id='container']/p/a")).Click(); ;
             webDriver.Manage().Window.FullScreen();
-            createNew.Click();
-
-            //Valid the page turn successful 
-            //IWebElement timeAndMaterials = webDriver.FindElement(By.XPath("//*[@id='container']/h2"));
-            //Assert.AreEqual("Time and Materials", timeAndMaterials.Text);
         }
 
         public void NevigateToTheNumbericEditPage(IWebDriver webDriver, int i)
@@ -28,44 +24,27 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Edit Xpath - " + xpath);
 
             //Find the numberic button and click
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
-            IWebElement editRecord = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
-            editRecord.Click();
+            WaitHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            webDriver.FindElement(By.XPath(xpath)).Click();
 
         }
 
         public void EditTheRecordValues(IWebDriver webDriver, string typeCode, string code, string description, string price)
         {
             //Click the dropdown
-            Thread.Sleep(1000);
-            IWebElement selectElement = webDriver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
-            selectElement.Click();
+            WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 10);
+            webDriver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]")).Click();
 
             //Select typecode "T" or "M"
             if (typeCode.Equals("M"))
             {
-                Thread.Sleep(1000);
-                //WebDriverWait waitOptionElement = new WebDriverWait(webDriver, Tests.timeWaiting);
-                //IWebElement optionElement = waitOptionElement.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id='TypeCode_listbox']/li[1]")));
-                IWebElement optionElement = webDriver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[1]"));
-                //li[@role='option' and contains(text(),'Material')]
-                //*[@id="TypeCode_listbox"]/li[1]
-                Boolean isDisplayed = optionElement.Displayed;
-                Console.WriteLine("typeCode is M, Displayed = " + isDisplayed);
-                optionElement.Click();
-
+                WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='TypeCode_listbox']/li[1]", 10);
+                webDriver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[1]")).Click();
             }
             else if (typeCode.Equals("T"))
             {
-                Thread.Sleep(1000);
-                IWebElement optionElement = webDriver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]"));
-                //WebDriverWait waitOptionElement = new WebDriverWait(webDriver, timeWaiting);
-                //IWebElement optionElement = waitOptionElement.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id='TypeCode_listbox']/li[2]")));
-
-                Boolean isDisplayed = optionElement.Displayed;
-                Console.WriteLine("typeCode is T, Displayed = " + isDisplayed);
-                optionElement.Click();
-
+                WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='TypeCode_listbox']/li[2]", 10);
+                webDriver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]")).Click();
             }
 
             //Find code textbox and input value
@@ -82,8 +61,8 @@ namespace TimeMaterialTestCases.Pages
             IWebElement eInputAvalible = webDriver.FindElement(By.XPath("//input[@tabindex='0']"));
             eInputAvalible.Click();
 
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
-            IWebElement ePrice = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("Price")));
+            WaitHelper.WaitClickable(webDriver, "Id", "Price", 5);
+            IWebElement ePrice = webDriver.FindElement(By.Id("Price"));
             if (!String.IsNullOrEmpty(ePrice.GetAttribute("aria-valuenow")))
             {
                 ePrice.Clear();
@@ -105,27 +84,29 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Delete Xpath - " + xpath);
 
             //Find the numberic button and click
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
-            IWebElement deleteRecord = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
-            deleteRecord.Click();
+            WaitHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            webDriver.FindElement(By.XPath(xpath)).Click();
 
             //Click the alert pop-up
             IAlert alert = webDriver.SwitchTo().Alert();
-            Thread.Sleep(1000);
-            //webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(10000);
             alert.Accept();
         }
 
         //Go to the last page
         public void GoToLastPage(IWebDriver webDriver)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
+            //webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 10);
             webDriver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span")).Click();
+
         }
 
         //Get the last record Code
         public String GetLastRecordCode(IWebDriver webDriver)
         {
+
+            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
             var getCode = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             return getCode.Text;
         }
@@ -133,6 +114,7 @@ namespace TimeMaterialTestCases.Pages
         //Get the last record TypeCode
         public String GetLastRecordTypeCode(IWebDriver webDriver)
         {
+            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]", 5);
             var getTypeCode = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
             return getTypeCode.Text;
         }
@@ -140,6 +122,7 @@ namespace TimeMaterialTestCases.Pages
         //Get the last record Description
         public String GetLastRecordDescription(IWebDriver webDriver)
         {
+            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]", 5);
             var getDescripiton = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
             return getDescripiton.Text;
 
@@ -148,34 +131,10 @@ namespace TimeMaterialTestCases.Pages
         //Get the last record Price
         public String GetLastRecordPrice(IWebDriver webDriver)
         {
+            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]", 5);
             var getPrice = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
             Console.WriteLine("getPrice = " + getPrice.Text);
             return getPrice.Text;
         }
-
-        /* Format Price
-         * @param price The price to be formated, 10000.123
-         * @return In the format of $10,000.12
-         */
-        public String FormatPrice(String price)
-        {
-            String[] priceStrs = price.Split('.', StringSplitOptions.RemoveEmptyEntries);
-            String priceNum = priceStrs[0];
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int index = priceNum.Length - 1; index >= 0; index--)
-            {
-                char c = priceNum[index];
-                var len = priceNum.Length - index;
-                if (len > 3 && len % 3 == 1)
-                {
-                    stringBuilder.Insert(0, ',');
-                }
-                stringBuilder.Insert(0, c);
-            }
-            stringBuilder.Insert(0, '$');
-            String priceDecimal = (priceStrs.Length > 1) ? priceStrs[1] : "00";
-            return stringBuilder.Append("." + priceDecimal.Substring(0, 2)).ToString();
-        }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using TimeMaterialTestCases.Helpers;
 
 namespace TimeMaterialTestCases.Pages
 {
@@ -45,13 +45,11 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Delete Xpath - " + xpath);
 
             //Find the numberic button and click
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
-            IWebElement deleteRecord = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
-            deleteRecord.Click();
+            WaitHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            webDriver.FindElement(By.XPath(xpath)).Click();
 
             //Click the alert pop-up
             IAlert alert = webDriver.SwitchTo().Alert();
-            Thread.Sleep(1000);
             alert.Accept();
         }
     }

@@ -1,6 +1,5 @@
 using System;
 using System.Net;
-using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -29,7 +28,7 @@ namespace TimeMaterialTestCases
             Assert.AreEqual("A AA T", tMPage.GetLastRecordCode(driver));
             Assert.AreEqual("T", tMPage.GetLastRecordTypeCode(driver));
             Assert.AreEqual("Add New Time", tMPage.GetLastRecordDescription(driver));
-            Assert.AreEqual(tMPage.FormatPrice("123123"), tMPage.GetLastRecordPrice(driver));
+            Assert.AreEqual(Tools.FormatPrice("123123"), tMPage.GetLastRecordPrice(driver));
         }
 
         [Test, Description("Check if the user is able to create a new material record successfully with valid details")]
@@ -47,7 +46,7 @@ namespace TimeMaterialTestCases
             Assert.AreEqual("A AA M", tMPage.GetLastRecordCode(driver));
             Assert.AreEqual("M", tMPage.GetLastRecordTypeCode(driver));
             Assert.AreEqual("Add New Mater", tMPage.GetLastRecordDescription(driver));
-            Assert.AreEqual(tMPage.FormatPrice("987987.12"), tMPage.GetLastRecordPrice(driver));
+            Assert.AreEqual(Tools.FormatPrice("987987.12"), tMPage.GetLastRecordPrice(driver));
         }
 
         [Test, Description("Check if the user is able to edit an existing record successfully with valid details")]
@@ -77,7 +76,7 @@ namespace TimeMaterialTestCases
         public void TestParseString()
         {
             TMPage tMPage = new TMPage();
-            var formated = tMPage.FormatPrice("10000.123");
+            var formated = Tools.FormatPrice("10000.123");
             Assert.AreEqual(formated, "$10,000.12");
         }
 
@@ -85,7 +84,7 @@ namespace TimeMaterialTestCases
         public void TestParseString2()
         {
             TMPage tMPage = new TMPage();
-            var formated = tMPage.FormatPrice("10000");
+            var formated = Tools.FormatPrice("10000");
             Assert.AreEqual(formated, "$10,000.00");
         }
     }
