@@ -26,11 +26,11 @@ namespace TimeMaterialTestCases
         [TearDown]
         public void CloseBrowser()
         {
-            //driver.Close();
+            driver.Close();
         }
 
         /*Check if the user is able to login with the valid username and password
-         * The return string should be "Hello hari!"
+         * Expected: The return string should be "Hello hari!"
          */
         //[Test]
         public void TEST_001_Login_With_Valid_Values()
@@ -40,7 +40,7 @@ namespace TimeMaterialTestCases
         }
 
         /*Check if the user is able to create a new time record successfully with valid details
-         * Expected: The returned the text equal
+         * Expected: The last record equals the created record.
          */
         [Test]
         public void TEST_002_Create_New_Time_Record_With_Valid_Values()
@@ -52,18 +52,16 @@ namespace TimeMaterialTestCases
             tMPage.NevigateToCreateNewPage(driver);
             tMPage.EditTheRecordValues(driver, "T", "A AA T", "Add New Time", "123123");
 
-            //Go to the last page
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span")).Click();
-
-            //Get the last record code
-            var getCode = driver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-            Assert.AreEqual("A AA T", getCode.Text);
-
+            //Validate
+            tMPage.GoToLastPage(driver);
+            Assert.AreEqual("A AA T", tMPage.GetLastRecordCode(driver));
+            Assert.AreEqual("T", tMPage.GetLastRecordTypeCode(driver));
+            Assert.AreEqual("Add New Time", tMPage.GetLastRecordDescription(driver));
+            Assert.AreEqual(tMPage.FormatPrice("123123"), tMPage.GetLastRecordPrice(driver));
         }
 
         /*Check if the user is able to create a new material record successfully with valid details
-        * No check
+        * Expected: The last record equals the created record.
         */
         [Test]
         public void TEST_003_Create_New_Material_Record_With_Valid_Values()
@@ -73,15 +71,14 @@ namespace TimeMaterialTestCases
 
             TMPage tMPage = new TMPage();
             tMPage.NevigateToCreateNewPage(driver);
-            tMPage.EditTheRecordValues(driver, "M", "A AA M", "Add New Mater", "987987");
+            tMPage.EditTheRecordValues(driver, "M", "A AA M", "Add New Mater", "987987.12");
 
-            //Go to the last page
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span")).Click();
-
-            //Get the last record code
-            var getCode = driver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-            Assert.AreEqual("A AA M", getCode.Text);
+            //Validate
+            tMPage.GoToLastPage(driver);
+            Assert.AreEqual("A AA M", tMPage.GetLastRecordCode(driver));
+            Assert.AreEqual("M", tMPage.GetLastRecordTypeCode(driver));
+            Assert.AreEqual("Add New Mater", tMPage.GetLastRecordDescription(driver));
+            Assert.AreEqual(tMPage.FormatPrice("987987.12"), tMPage.GetLastRecordPrice(driver));
         }
 
         /*Check if the user is able to edit an existing record successfully with valid details
@@ -111,6 +108,22 @@ namespace TimeMaterialTestCases
             TMPage tMPage = new TMPage();
             tMPage.DeleteTheNumbericRecord(driver, 1);
             Console.WriteLine("Delete existing record successful");
+        }
+
+        //[Test]
+        public void TestParseString()
+        {
+            TMPage tMPage = new TMPage();
+            var formated = tMPage.FormatPrice("10000.123");
+            Assert.AreEqual(formated, "$10,000.12");
+        }
+
+        //[Test]
+        public void TestParseString2()
+        {
+            TMPage tMPage = new TMPage();
+            var formated = tMPage.FormatPrice("10000");
+            Assert.AreEqual(formated, "$10,000.00");
         }
     }
 }
