@@ -1,26 +1,25 @@
 ﻿<Properties StartupConfiguration="{7F256FE6-B8FA-4B09-B36C-BCD87F0DA093}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TimeMaterialTestCases/Helpers/Tools.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TimeMaterialTestCases/Pages/TMPage.cs">
     <Files>
-      <File FileName="TimeMaterialTestCases/Pages/LoginPage.cs" Line="23" Column="86" />
-      <File FileName="TimeMaterialTestCases/Pages/HomePage.cs" Line="19" Column="65" />
-      <File FileName="TimeMaterialTestCases/Tests/TestCases.cs" Line="28" Column="1" />
-      <File FileName="TimeMaterialTestCases/Pages/TMPage.cs" Line="138" Column="10" />
-      <File FileName="TimeMaterialTestCases/Tests/EmployeesTestCases.cs" Line="30" Column="86" />
-      <File FileName="TimeMaterialTestCases/Helpers/CommonDriver.cs" Line="12" Column="46" />
-      <File FileName="TimeMaterialTestCases/Tests/LoginTestCases.cs" Line="14" Column="37" />
-      <File FileName="TimeMaterialTestCases/Pages/EmployeePage.cs" Line="54" Column="10" />
-      <File FileName="TimeMaterialTestCases/Helpers/WaitHelper.cs" Line="18" Column="1" />
-      <File FileName="TimeMaterialTestCases/Helpers/Tools.cs" Line="28" Column="10" />
+      <File FileName="TimeMaterialTestCases/Pages/LoginPage.cs" Line="27" Column="98" />
+      <File FileName="TimeMaterialTestCases/Pages/HomePage.cs" Line="26" Column="29" />
+      <File FileName="TimeMaterialTestCases/Pages/TMPage.cs" Line="26" Column="1" />
+      <File FileName="TimeMaterialTestCases/Tests/EmployeesTestCases.cs" />
+      <File FileName="TimeMaterialTestCases/Helpers/CommonDriver.cs" />
+      <File FileName="TimeMaterialTestCases/Tests/LoginTestCases.cs" />
+      <File FileName="TimeMaterialTestCases/Helpers/Tools.cs" />
+      <File FileName="TimeMaterialTestCases/Tests/TMTestCases.cs" />
+      <File FileName="TimeMaterialTestCases/Helpers/WebHelper.cs" Line="28" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TimeMaterialTestCases" expanded="True">
             <Node name="TimeMaterialTestCases" expanded="True">
-              <Node name="Helpers" expanded="True">
-                <Node name="Tools.cs" selected="True" />
+              <Node name="Helpers" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="TMPage.cs" selected="True" />
               </Node>
-              <Node name="Pages" expanded="True" />
               <Node name="Tests" expanded="True" />
             </Node>
           </Node>
@@ -32,12 +31,10 @@
             <Node name="TimeMaterialTestCases" expanded="True">
               <Node name="TimeMaterialTestCases" expanded="True">
                 <Node name="TMTestCases" expanded="True">
-                  <Node name="TM_004_Delete_Existing_Record" selected="True" />
+                  <Node name="TM_003_Edit_Existing_Record_With_Valid_Values" selected="True" />
                 </Node>
               </Node>
-              <Node name="TimeMaterialTestCases.Tests" expanded="True">
-                <Node name="EmployeesTestCases" expanded="True" />
-              </Node>
+              <Node name="TimeMaterialTestCases.Tests" expanded="True" />
             </Node>
           </Node>
         </State>

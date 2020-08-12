@@ -10,7 +10,7 @@ namespace TimeMaterialTestCases.Pages
         public void NevigateToCreateNewPage(IWebDriver webDriver)
         {
             //Find create button and click
-            IWebElement createNew = webDriver.FindElement(By.XPath("//*[@id='container']/p/a"));
+            IWebElement createNew = WebHelper.FindElement(webDriver, By.XPath("//*[@id='container']/p/a"));
             webDriver.Manage().Window.FullScreen();
             createNew.Click();
         }
@@ -22,9 +22,8 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Edit Xpath - " + xpath);
 
             //Find the numberic button and click
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromMilliseconds(1000));
-            IWebElement editRecord = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
-            editRecord.Click();
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            WebHelper.FindElement(webDriver, By.XPath(xpath)).Click();
 
             //Fill in the details
 
@@ -45,8 +44,8 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Delete Xpath - " + xpath);
 
             //Find the numberic button and click
-            WaitHelper.WaitClickable(webDriver, "XPath", xpath, 5);
-            webDriver.FindElement(By.XPath(xpath)).Click();
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            WebHelper.FindElement(webDriver, By.XPath(xpath)).Click();
 
             //Click the alert pop-up
             IAlert alert = webDriver.SwitchTo().Alert();

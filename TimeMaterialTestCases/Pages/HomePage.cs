@@ -9,19 +9,23 @@ namespace TimeMaterialTestCases.Pages
 
         public void NevigateToTMPage(IWebDriver webDriver)
         {
-            webDriver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a")).Click();
+            //Find Administration button and click
+            WebHelper.FindElement(webDriver, By.XPath("/html/body/div[3]/div/div/ul/li[5]/a")).Click();
 
-            WaitHelper.WaitClickable(webDriver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a", 5);
-            webDriver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a")).Click();
+            //Find TM button and click
+            WebHelper.WaitClickable(webDriver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a", 10);
+            WebHelper.FindElement(webDriver, By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a")).Click();
             webDriver.Manage().Window.FullScreen();
         }
 
         public void NevigateToEmployeePage(IWebDriver webDriver)
         {
-            webDriver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a")).Click();
+            //Find Administration button and click
+            WebHelper.FindElement(webDriver, By.XPath("/html/body/div[3]/div/div/ul/li[5]/a")).Click();
 
-            WaitHelper.WaitClickable(webDriver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a", 5);
-            webDriver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a")).Click();
+            //Find Employees button and click
+            WebHelper.WaitClickable(webDriver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a", 10);
+            WebHelper.FindElement(webDriver,By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a")).Click();
             webDriver.Manage().Window.FullScreen();
         }
     }

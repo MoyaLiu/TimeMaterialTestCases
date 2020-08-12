@@ -13,56 +13,59 @@ namespace TimeMaterialTestCases.Pages
         public void NevigateToCreateNewPage(IWebDriver webDriver)
         {
             //Find create button and click
-            webDriver.FindElement(By.XPath("//*[@id='container']/p/a")).Click(); ;
+            WebHelper.FindElement(webDriver, By.XPath("//*[@id='container']/p/a")).Click(); ;
             webDriver.Manage().Window.FullScreen();
         }
 
+        /* Nevigate to the numberic record edit page
+         * @param i: The index of the record in the page list, 1 - the first record
+         */
         public void NevigateToTheNumbericEditPage(IWebDriver webDriver, int i)
         {
             //Splice xpath
             string xpath = "//*[@id='tmsGrid']/div[3]/table/tbody/tr[" + i.ToString() + "]/td[5]/a[1]";
-            Console.WriteLine("Edit Xpath - " + xpath);
+            Console.WriteLine("NevigateToTheNumbericEditPage, Edit Xpath - " + xpath);
 
             //Find the numberic button and click
-            WaitHelper.WaitClickable(webDriver, "XPath", xpath, 5);
-            webDriver.FindElement(By.XPath(xpath)).Click();
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            WebHelper.FindElement(webDriver, By.XPath(xpath)).Click();
 
         }
 
         public void EditTheRecordValues(IWebDriver webDriver, string typeCode, string code, string description, string price)
         {
             //Click the dropdown
-            WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 10);
-            webDriver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]")).Click();
+            WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 10);
+            WebHelper.FindElement(webDriver, By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]")).Click();
 
             //Select typecode "T" or "M"
             if (typeCode.Equals("M"))
             {
-                WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='TypeCode_listbox']/li[1]", 10);
-                webDriver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[1]")).Click();
+                WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='TypeCode_listbox']/li[1]", 10);
+                WebHelper.FindElement(webDriver, By.XPath("//*[@id='TypeCode_listbox']/li[1]")).Click();
             }
             else if (typeCode.Equals("T"))
             {
-                WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='TypeCode_listbox']/li[2]", 10);
-                webDriver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]")).Click();
+                WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='TypeCode_listbox']/li[2]", 10);
+                WebHelper.FindElement(webDriver, By.XPath("//*[@id='TypeCode_listbox']/li[2]")).Click();
             }
 
             //Find code textbox and input value
-            IWebElement eCode = webDriver.FindElement(By.Id("Code"));
+            IWebElement eCode = WebHelper.FindElement(webDriver, By.Id("Code"));
             eCode.Clear();
             eCode.SendKeys(code);
 
             //Find description textbox and input value
-            IWebElement eDescription = webDriver.FindElement(By.Id("Description"));
+            IWebElement eDescription = WebHelper.FindElement(webDriver, By.Id("Description"));
             eDescription.Clear();
             eDescription.SendKeys(description);
 
             //Find price textbox and input value
-            IWebElement eInputAvalible = webDriver.FindElement(By.XPath("//input[@tabindex='0']"));
+            IWebElement eInputAvalible = WebHelper.FindElement(webDriver, By.XPath("//input[@tabindex='0']"));
             eInputAvalible.Click();
 
-            WaitHelper.WaitClickable(webDriver, "Id", "Price", 5);
-            IWebElement ePrice = webDriver.FindElement(By.Id("Price"));
+            WebHelper.WaitClickable(webDriver, "Id", "Price", 5);
+            IWebElement ePrice = WebHelper.FindElement(webDriver, By.Id("Price"));
             if (!String.IsNullOrEmpty(ePrice.GetAttribute("aria-valuenow")))
             {
                 ePrice.Clear();
@@ -71,11 +74,11 @@ namespace TimeMaterialTestCases.Pages
             ePrice.SendKeys(price);
 
             //Find save button and click
-            webDriver.FindElement(By.Id("SaveButton")).Click();
+            WebHelper.FindElement(webDriver, By.Id("SaveButton")).Click();
         }
 
         /* Delete the numberic record
-         * @param The number of the record in the page list
+         * @param i: The index of the record in the page list, 1 - the first record
          */
         public void DeleteTheNumbericRecord(IWebDriver webDriver, int i)
         {
@@ -84,8 +87,8 @@ namespace TimeMaterialTestCases.Pages
             Console.WriteLine("Delete Xpath - " + xpath);
 
             //Find the numberic button and click
-            WaitHelper.WaitClickable(webDriver, "XPath", xpath, 5);
-            webDriver.FindElement(By.XPath(xpath)).Click();
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 10);
+            WebHelper.FindElement(webDriver, By.XPath(xpath)).Click();
 
             //Click the alert pop-up
             IAlert alert = webDriver.SwitchTo().Alert();
@@ -97,8 +100,8 @@ namespace TimeMaterialTestCases.Pages
         {
             Thread.Sleep(2000);
             //webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            //WaitHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 10);
-            webDriver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span")).Click();
+            //WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 10);
+            WebHelper.FindElement(webDriver,By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span")).Click();
 
         }
 
@@ -106,24 +109,24 @@ namespace TimeMaterialTestCases.Pages
         public String GetLastRecordCode(IWebDriver webDriver)
         {
 
-            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
-            var getCode = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            WebHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
+            var getCode = WebHelper.FindElement(webDriver, By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             return getCode.Text;
         }
 
         //Get the last record TypeCode
         public String GetLastRecordTypeCode(IWebDriver webDriver)
         {
-            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]", 5);
-            var getTypeCode = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
+            WebHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]", 5);
+            var getTypeCode = WebHelper.FindElement(webDriver, By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
             return getTypeCode.Text;
         }
 
         //Get the last record Description
         public String GetLastRecordDescription(IWebDriver webDriver)
         {
-            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]", 5);
-            var getDescripiton = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            WebHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]", 5);
+            var getDescripiton = WebHelper.FindElement(webDriver, By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
             return getDescripiton.Text;
 
         }
@@ -131,10 +134,55 @@ namespace TimeMaterialTestCases.Pages
         //Get the last record Price
         public String GetLastRecordPrice(IWebDriver webDriver)
         {
-            WaitHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]", 5);
-            var getPrice = webDriver.FindElement(By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            WebHelper.WaitClickable(webDriver, "XPath", ".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]", 5);
+            var getPrice = WebHelper.FindElement(webDriver, By.XPath(".//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
             Console.WriteLine("getPrice = " + getPrice.Text);
             return getPrice.Text;
+        }
+
+        /* Get the Code text of the numberic record
+         * @param i: The index of the record, 2 - the second record
+         */
+        public String GetTheNumbericRecordCode(IWebDriver webDriver, int i)
+        {
+            string xpath = "//*[@id='tmsGrid']/div[3]/table/tbody/tr[" + i.ToString() + "]/td[1]";
+
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            var getCode = WebHelper.FindElement(webDriver, By.XPath(xpath));
+            return getCode.Text;
+        }
+
+        /* Get the TypeCode text of the numberic record
+         * @param i: The index of the record in the page list, 1 - the first record
+         */
+        public String GetTheNumbericRecordTypeCode(IWebDriver webDriver, int i)
+        {
+            string xpath = "//*[@id='tmsGrid']/div[3]/table/tbody/tr[" + i.ToString() + "]/td[2]";
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            var getCode = WebHelper.FindElement(webDriver, By.XPath(xpath));
+            return getCode.Text;
+        }
+
+        /* Get the Description text of the numberic record
+         * @param i: The index of the record in the page list, 1 - the first record
+         */
+        public String GetTheNumbericRecordDescription(IWebDriver webDriver, int i)
+        {
+            string xpath = "//*[@id='tmsGrid']/div[3]/table/tbody/tr[" + i.ToString() + "]/td[3]";
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            var getCode = WebHelper.FindElement(webDriver, By.XPath(xpath));
+            return getCode.Text;
+        }
+
+        /* Get the Price text of the numberic record
+         * @param i: The index of the record in the page list, 1 - the first record
+         */
+        public String GetTheNumbericRecordPrice(IWebDriver webDriver, int i)
+        {
+            string xpath = "//*[@id='tmsGrid']/div[3]/table/tbody/tr[" + i.ToString() + "]/td[4]";
+            WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
+            var getCode = WebHelper.FindElement(webDriver, By.XPath(xpath));
+            return getCode.Text;
         }
     }
 }

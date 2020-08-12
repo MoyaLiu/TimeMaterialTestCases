@@ -56,9 +56,14 @@ namespace TimeMaterialTestCases
             homePage.NevigateToTMPage(driver);
 
             TMPage tMPage = new TMPage();
-            tMPage.NevigateToTheNumbericEditPage(driver, 1);
+            tMPage.NevigateToTheNumbericEditPage(driver, 2);
             tMPage.EditTheRecordValues(driver, "M", "AA A E", "Editing", "456456");
-            Console.WriteLine("Edit existing record successful");
+
+            //Validate
+            Assert.AreEqual("AA A E", tMPage.GetTheNumbericRecordCode(driver, 2));
+            Assert.AreEqual("M", tMPage.GetTheNumbericRecordTypeCode(driver, 2));
+            Assert.AreEqual("Editing", tMPage.GetTheNumbericRecordDescription(driver, 2));
+            Assert.AreEqual(Tools.FormatPrice("456456"), tMPage.GetTheNumbericRecordPrice(driver, 2));
         }
 
         [Test, Description("Check if the user is able to delete an existing record successfully")]
@@ -67,9 +72,21 @@ namespace TimeMaterialTestCases
             HomePage homePage = new HomePage();
             homePage.NevigateToTMPage(driver);
 
+            //Precondition:press edit to save the record url.
             TMPage tMPage = new TMPage();
+            tMPage.NevigateToTheNumbericEditPage(driver, 1);
+            var recordURL = WebHelper.GetCurrentPageURL(driver, 5, By.XPath("//*[@id='container']/h2"));
+            Console.WriteLine("Record url is " + recordURL);
+            WebHelper.WaitClickable(driver, "XPath", "//*[@id='container']/div/a", 10);
+            WebHelper.FindElement(driver, By.XPath("//*[@id='container']/div/a")).Click();
+
+            //Delete the record
             tMPage.DeleteTheNumbericRecord(driver, 1);
-            Console.WriteLine("Delete existing record successful");
+
+            //Validate
+            driver.Navigate().GoToUrl(recordURL);
+            var noRecordText = WebHelper.FindElement(driver, By.XPath("/html/body"));
+            Assert.AreEqual("The resource you are looking for has been removed, had its name changed, or is temporarily unavailable.", noRecordText.Text);
         }
 
         //[Test]
