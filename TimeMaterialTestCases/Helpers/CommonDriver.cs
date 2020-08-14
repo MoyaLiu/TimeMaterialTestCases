@@ -9,7 +9,6 @@ namespace TimeMaterialTestCases.Helpers
     public class CommonDriver
     {
         public IWebDriver driver;
-        public static TimeSpan timeWaiting = TimeSpan.FromMilliseconds(1000);
         public String loginUrl = "http://horse-dev.azurewebsites.net/";
 
         [OneTimeSetUp]
