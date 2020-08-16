@@ -10,17 +10,20 @@ namespace TimeMaterialTestCases.Pages
 {
     public class TMPage
     {
-        public void NevigateToCreateNewPage(IWebDriver webDriver)
+        public Boolean NevigateToCreateNewPage(IWebDriver webDriver)
         {
             //Find create button and click
             WebHelper.FindElement(webDriver, By.XPath("//*[@id='container']/p/a")).Click(); ;
             webDriver.Manage().Window.FullScreen();
+
+            //If find "Time and Materials", return true
+            return WebHelper.FindElement(webDriver, By.XPath("//*[@id='container']/h2")).Text.Equals("Time and Materials");
         }
 
         /* Nevigate to the numberic record edit page
          * @param i: The index of the record in the page list, 1 - the first record
          */
-        public void NevigateToTheNumbericEditPage(IWebDriver webDriver, int i)
+        public Boolean NevigateToTheNumbericEditPage(IWebDriver webDriver, int i)
         {
             //Splice xpath
             string xpath = "//*[@id='tmsGrid']/div[3]/table/tbody/tr[" + i.ToString() + "]/td[5]/a[1]";
@@ -30,9 +33,11 @@ namespace TimeMaterialTestCases.Pages
             WebHelper.WaitClickable(webDriver, "XPath", xpath, 5);
             WebHelper.FindElement(webDriver, By.XPath(xpath)).Click();
 
+            return WebHelper.FindElement(webDriver, By.Id("downloadButton")).Text.Equals("Download");
+
         }
 
-        public void EditTheRecordValues(IWebDriver webDriver, string typeCode, string code, string description, string price)
+        public Boolean EditTheRecordValues(IWebDriver webDriver, string typeCode, string code, string description, string price)
         {
             //Click the dropdown
             WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 10);
@@ -75,6 +80,11 @@ namespace TimeMaterialTestCases.Pages
 
             //Find save button and click
             WebHelper.FindElement(webDriver, By.Id("SaveButton")).Click();
+
+            //Find "Price" to validate return to the TM page
+            WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[2]/div/table/thead/tr/th[4]/a", 5);
+            return WebHelper.FindElement(webDriver, By.XPath("//*[@id='tmsGrid']/div[2]/div/table/thead/tr/th[4]/a")).Text.Equals("Price");
+
         }
 
         /* Delete the numberic record
@@ -96,13 +106,16 @@ namespace TimeMaterialTestCases.Pages
         }
 
         //Go to the last page
-        public void GoToLastPage(IWebDriver webDriver)
+        public Boolean GoToLastPage(IWebDriver webDriver)
         {
             Thread.Sleep(2000);
             //webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             //WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 10);
             WebHelper.FindElement(webDriver,By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span")).Click();
 
+            //Validate the "Go to the last page" is disable
+            WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 5);
+            return WebHelper.FindElement(webDriver, By.XPath("//*[@id='tmsGrid']/div[4]/a[4]")).GetAttribute("class").Contains("k-state-disabled");
         }
 
         //Get the last record Code

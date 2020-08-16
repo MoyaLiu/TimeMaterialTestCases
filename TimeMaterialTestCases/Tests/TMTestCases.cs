@@ -17,14 +17,15 @@ namespace TimeMaterialTestCases
         public void TM_001_Create_New_Time_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
-            homePage.NevigateToTMPage(driver);
+            Assert.AreEqual(true, homePage.NevigateToTMPage(driver));
+
 
             TMPage tMPage = new TMPage();
-            tMPage.NevigateToCreateNewPage(driver);
-            tMPage.EditTheRecordValues(driver, "T", "A AA T", "Add New Time", "123123");
+            Assert.AreEqual(true, tMPage.NevigateToCreateNewPage(driver));
+            Assert.AreEqual(true, tMPage.EditTheRecordValues(driver, "T", "A AA T", "Add New Time", "123123"));
 
             //Validate
-            tMPage.GoToLastPage(driver);
+            Assert.AreEqual(true, tMPage.GoToLastPage(driver));
             Assert.AreEqual("A AA T", tMPage.GetLastRecordCode(driver));
             Assert.AreEqual("T", tMPage.GetLastRecordTypeCode(driver));
             Assert.AreEqual("Add New Time", tMPage.GetLastRecordDescription(driver));
@@ -35,14 +36,14 @@ namespace TimeMaterialTestCases
         public void TM_002_Create_New_Material_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
-            homePage.NevigateToTMPage(driver);
+            Assert.AreEqual(true, homePage.NevigateToTMPage(driver));
 
             TMPage tMPage = new TMPage();
-            tMPage.NevigateToCreateNewPage(driver);
-            tMPage.EditTheRecordValues(driver, "M", "A AA M", "Add New Mater", "987987.12");
+            Assert.AreEqual(true, tMPage.NevigateToCreateNewPage(driver));
+            Assert.AreEqual(true, tMPage.EditTheRecordValues(driver, "M", "A AA M", "Add New Mater", "987987.12"));
 
             //Validate
-            tMPage.GoToLastPage(driver);
+            Assert.AreEqual(true, tMPage.GoToLastPage(driver));
             Assert.AreEqual("A AA M", tMPage.GetLastRecordCode(driver));
             Assert.AreEqual("M", tMPage.GetLastRecordTypeCode(driver));
             Assert.AreEqual("Add New Mater", tMPage.GetLastRecordDescription(driver));
@@ -53,11 +54,11 @@ namespace TimeMaterialTestCases
         public void TM_003_Edit_Existing_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
-            homePage.NevigateToTMPage(driver);
+            Assert.AreEqual(true, homePage.NevigateToTMPage(driver));
 
             TMPage tMPage = new TMPage();
-            tMPage.NevigateToTheNumbericEditPage(driver, 2);
-            tMPage.EditTheRecordValues(driver, "M", "AA A E", "Editing", "456456");
+            Assert.AreEqual(true, tMPage.NevigateToTheNumbericEditPage(driver, 2));
+            Assert.AreEqual(true, tMPage.EditTheRecordValues(driver, "M", "AA A E", "Editing", "456456"));
 
             //Validate
             Assert.AreEqual("AA A E", tMPage.GetTheNumbericRecordCode(driver, 2));
@@ -66,15 +67,16 @@ namespace TimeMaterialTestCases
             Assert.AreEqual(Tools.FormatPrice("456456"), tMPage.GetTheNumbericRecordPrice(driver, 2));
         }
 
+
         [Test, Description("Check if the user is able to delete an existing record successfully")]
         public void TM_004_Delete_Existing_Record()
         {
             HomePage homePage = new HomePage();
-            homePage.NevigateToTMPage(driver);
+            Assert.AreEqual(true, homePage.NevigateToTMPage(driver));
 
             //Precondition:press edit to save the record url.
             TMPage tMPage = new TMPage();
-            tMPage.NevigateToTheNumbericEditPage(driver, 1);
+            Assert.AreEqual(true, tMPage.NevigateToTheNumbericEditPage(driver, 1));
             var recordURL = WebHelper.GetCurrentPageURL(driver, 5, By.XPath("//*[@id='container']/h2"));
             Console.WriteLine("Record url is " + recordURL);
             WebHelper.WaitClickable(driver, "XPath", "//*[@id='container']/div/a", 10);
@@ -92,7 +94,6 @@ namespace TimeMaterialTestCases
         //[Test]
         public void TestParseString()
         {
-            TMPage tMPage = new TMPage();
             var formated = Tools.FormatPrice("10000.123");
             Assert.AreEqual(formated, "$10,000.12");
         }
@@ -100,7 +101,6 @@ namespace TimeMaterialTestCases
         //[Test]
         public void TestParseString2()
         {
-            TMPage tMPage = new TMPage();
             var formated = Tools.FormatPrice("10000");
             Assert.AreEqual(formated, "$10,000.00");
         }

@@ -7,12 +7,15 @@ namespace TimeMaterialTestCases.Pages
 {
     public class EmployeePage
     {
-        public void NevigateToCreateNewPage(IWebDriver webDriver)
+        public Boolean NevigateToCreateNewPage(IWebDriver webDriver)
         {
             //Find create button and click
             IWebElement createNew = WebHelper.FindElement(webDriver, By.XPath("//*[@id='container']/p/a"));
             webDriver.Manage().Window.FullScreen();
             createNew.Click();
+
+            //*[@id="container"]/h2
+            return WebHelper.FindElement(webDriver, By.XPath("//*[@id='container']/h2")).Text.Equals("Employee Details");
         }
 
         public void NevigateToTheNumbericEditPage(IWebDriver webDriver, int i)

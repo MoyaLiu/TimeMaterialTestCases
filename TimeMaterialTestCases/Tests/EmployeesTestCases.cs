@@ -13,7 +13,10 @@ namespace TimeMaterialTestCases.Tests
         public void EM_001_Create_New_Employee_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
-            homePage.NevigateToEmployeePage(driver);
+            Assert.AreEqual(true, homePage.NevigateToEmployeePage(driver));
+
+            EmployeePage employeePage = new EmployeePage();
+            Assert.AreEqual(true, employeePage.NevigateToCreateNewPage(driver));
 
 
         }
@@ -22,7 +25,7 @@ namespace TimeMaterialTestCases.Tests
         public void EM_002_Edit_Existing_Record_With_Valid_Values()
         {
             HomePage homePage = new HomePage();
-            homePage.NevigateToEmployeePage(driver);
+            Assert.AreEqual(true, homePage.NevigateToEmployeePage(driver));
 
 
         }
@@ -31,7 +34,7 @@ namespace TimeMaterialTestCases.Tests
         public void EM_003_Delete_Existing_Record()
         {
             HomePage homePage = new HomePage();
-            homePage.NevigateToEmployeePage(driver);
+            Assert.AreEqual(true, homePage.NevigateToEmployeePage(driver));
 
         }
     }
