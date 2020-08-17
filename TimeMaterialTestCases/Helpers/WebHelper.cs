@@ -25,6 +25,26 @@ namespace TimeMaterialTestCases.Helpers
             }
         }
 
+        public static void WaitVisible(IWebDriver webDriver, String attribute, String value, int seconds)
+        {
+            try
+            {
+                var wait = new WebDriverWait(webDriver, new TimeSpan(0, 0, seconds));
+                if (attribute.Equals("Id"))
+                {
+                    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id(value)));
+                }
+                else if (attribute.Equals("XPath"))
+                {
+                    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath(value)));
+                }
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine("The element is not clickable, time out, " + ex.Message);
+            }
+        }
+
         public static IWebElement FindElement(IWebDriver webDriver,By by)
         {
             try

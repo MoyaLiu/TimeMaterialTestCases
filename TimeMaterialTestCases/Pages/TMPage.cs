@@ -37,8 +37,12 @@ namespace TimeMaterialTestCases.Pages
 
         }
 
-        public Boolean EditTheRecordValues(IWebDriver webDriver, string typeCode, string code, string description, string price)
+        public void EditTheRecordValues(IWebDriver webDriver, string typeCode, string code, string description, string price)
         {
+            if(typeCode == null || code == null || description == null || price == null)
+            {
+                return;
+            }
             //Click the dropdown
             WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 10);
             WebHelper.FindElement(webDriver, By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]")).Click();
@@ -82,8 +86,8 @@ namespace TimeMaterialTestCases.Pages
             WebHelper.FindElement(webDriver, By.Id("SaveButton")).Click();
 
             //Find "Price" to validate return to the TM page
-            WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[2]/div/table/thead/tr/th[4]/a", 5);
-            return WebHelper.FindElement(webDriver, By.XPath("//*[@id='tmsGrid']/div[2]/div/table/thead/tr/th[4]/a")).Text.Equals("Price");
+            //WebHelper.WaitClickable(webDriver, "XPath", "//*[@id='tmsGrid']/div[2]/div/table/thead/tr/th[4]/a", 5);
+            //return WebHelper.FindElement(webDriver, By.XPath("//*[@id='tmsGrid']/div[2]/div/table/thead/tr/th[4]/a")).Text.Equals("Price");
 
         }
 

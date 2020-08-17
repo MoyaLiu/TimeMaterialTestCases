@@ -11,6 +11,10 @@ namespace TimeMaterialTestCases.Helpers
          */
         public static String FormatPrice(String price)
         {
+            if(price.Length == 0 || price == null)
+            {
+                return String.Empty;
+            }
             String[] priceStrs = price.Split('.', StringSplitOptions.RemoveEmptyEntries);
             String priceNum = priceStrs[0];
             StringBuilder stringBuilder = new StringBuilder();

@@ -14,7 +14,6 @@ namespace TimeMaterialTestCases.Pages
             webDriver.Manage().Window.FullScreen();
             createNew.Click();
 
-            //*[@id="container"]/h2
             return WebHelper.FindElement(webDriver, By.XPath("//*[@id='container']/h2")).Text.Equals("Employee Details");
         }
 
