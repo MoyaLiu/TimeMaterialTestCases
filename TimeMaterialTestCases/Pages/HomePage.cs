@@ -25,6 +25,7 @@ namespace TimeMaterialTestCases.Pages
         public Boolean NevigateToEmployeePage(IWebDriver webDriver)
         {
             //Find Administration button and click
+            WebHelper.WaitClickable(webDriver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/a", 5);
             WebHelper.FindElement(webDriver, By.XPath("/html/body/div[3]/div/div/ul/li[5]/a")).Click();
 
             //Find Employees button and click
